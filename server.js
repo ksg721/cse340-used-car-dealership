@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { fileURLToPath } from "url";
 
 /**
  * Server configuration
@@ -48,11 +49,13 @@ if (NODE_ENV.includes("dev")) {
   }
 }
 
+app.get("/", (req, res) => {
+  res.send("Used car dealership is running");
+});
+
 /**
  * Start Server
  */
 app.listen(PORT, async () => {
-  await setupDatabase();
-  await testConnection();
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
