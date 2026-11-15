@@ -7,6 +7,8 @@ import connectPgSimple from "connect-pg-simple";
 import { setupDatabase, testConnection } from "./src/models/setup.js";
 import { startSessionCleanup } from "./src/utils/session-cleanup.js";
 
+import routes from "./src/controllers/routes.js";
+
 /**
  * Server configuration
  */
@@ -78,11 +80,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(currentDirectory, "src/views"));
 
 /**
- * Temporary route
+ * Routes
  */
-app.get("/", (request, response) => {
-  response.send("Used car dealership is running.");
-});
+app.use("/", routes);
 
 /**
  * Start Server
@@ -97,6 +97,7 @@ const startServer = async () => {
 
     app.listen(port, "0.0.0.0", () => {
       console.log(`Server is running on port ${port}.`);
+      console.log(`Local URL: http://localhost:${port}/`);
       console.log(`Environment: ${nodeEnvironment}.`);
     });
   } catch (error) {
