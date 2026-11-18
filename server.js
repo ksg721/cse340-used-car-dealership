@@ -93,6 +93,51 @@ app.use(addLocalVariables);
 app.use("/", routes);
 
 /**
+ * Error Handling
+ */
+// Handle requests that do not match an existing route
+app.use((req, res, next) => {
+  const error = new Error("Page Not Found");
+  error.status = 404;
+
+  next(error);
+});
+
+// Handle errors from routes and middleware
+app.use((error, req, res, next) => {
+  // Avoid sending another response if one has already been sent
+  if (res.headersSent || res.finished) {
+    return next(error);
+  }
+
+  // Use the error status when available, otherwise use status 500
+  const status = error.status || 500;
+
+  // Select the appropriate view
+  const template = status === 404 ? "404" : "500";
+
+  // Hide detailed error information in production
+  const context = {
+    title: status === 404 ? "Page Not Found" : "Server Error",
+    error:
+      nodeEnvironment === "production" ? "An error occurred." : error.message,
+    stack: nodeEnvironment === "production" ? null : error.stack,
+  };
+
+  // Render the appropriate error view
+  try {
+    res.status(status).render(`errors/${template}`, context);
+  } catch (renderError) {
+    // Send a basic response if the error view cannot be rendered
+    if (!res.headersSent) {
+      res
+        .status(status)
+        .send(`<h1>Error ${status}</h1><p>An error occurred.</p>`);
+    }
+  }
+});
+
+/**
  * Start Server
  */
 const startServer = async () => {
