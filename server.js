@@ -8,6 +8,8 @@ import { setupDatabase, testConnection } from "./src/models/setup.js";
 import { startSessionCleanup } from "./src/utils/session-cleanup.js";
 
 import routes from "./src/controllers/routes.js";
+// Import global middleware.
+import { addLocalVariables } from "./src/middleware/global.js";
 
 /**
  * Server configuration
@@ -78,6 +80,12 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 app.set("views", path.join(currentDirectory, "src/views"));
+
+/**
+ * Global Middleware
+ */
+// Add common template variables
+app.use(addLocalVariables);
 
 /**
  * Routes
