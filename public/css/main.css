@@ -1,36 +1,100 @@
+:root {
+  --navy: #142b4a;
+  --navy-light: #214a78;
+  --gold: #d89b2b;
+  --gold-dark: #a96f0f;
+  --background: #f4f6f8;
+  --surface: #ffffff;
+  --text: #1e2933;
+  --muted-text: #52606d;
+  --border: #d8e0e8;
+  --shadow: 0 8px 24px rgb(20 43 74 / 10%);
+}
+
+/* Use predictable sizing across the application. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set the shared page appearance. */
 body {
-  align-items: center;
-  background-color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-  justify-content: center;
-  margin: 0;
+  min-width: 320px;
   min-height: 100vh;
-  text-align: center;
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
 }
 
-header,
-footer {
-  text-align: center;
+/* Keep links readable and visibly interactive. */
+a {
+  color: var(--navy-light);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Shared site header. */
+header {
   width: 100%;
+  padding: 1.25rem 1rem;
+  background: var(--navy);
+  color: var(--surface);
 }
 
+header h1 {
+  max-width: 1160px;
+  margin: 0 auto;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: 0.02em;
+}
+
+/* Give each page a consistent vertical structure. */
 main {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
-  max-width: 600px;
-  padding: 3rem;
+  width: min(100% - 2rem, 1160px);
+  min-height: calc(100vh - 160px);
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
 }
 
 h1 {
-  color: #333;
-  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
-p {
-  color: #666;
-  font-size: 1.1rem;
-  line-height: 1.6;
+/* Shared footer. */
+footer {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  background: var(--navy);
+  color: var(--surface);
+  text-align: center;
+}
+
+footer p {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* Keep smaller screens from creating cramped page edges. */
+@media (max-width: 600px) {
+  main {
+    width: min(100% - 1.25rem, 1160px);
+    padding: 2rem 0;
+  }
+
+  header {
+    padding: 1rem 0.625rem;
+  }
 }

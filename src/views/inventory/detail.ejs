@@ -1,0 +1,92 @@
+<%- include("../partials/header") %>
+
+<main class="vehicle-detail-page">
+  <p>
+    <a href="/inventory">← Back to Inventory</a>
+  </p>
+
+  <article class="vehicle-detail">
+    <header class="vehicle-detail-header">
+      <h1>
+        <%= vehicle.year %>
+        <%= vehicle.make %>
+        <%= vehicle.model %>
+      </h1>
+
+      <p class="vehicle-price">
+        $<%= Number(vehicle.price).toLocaleString() %>
+      </p>
+    </header>
+
+    <section class="vehicle-images" aria-labelledby="images-heading">
+      <h2 id="images-heading">Vehicle Images</h2>
+
+      <% if (images.length === 0) { %>
+        <p>No images are currently available for this vehicle.</p>
+      <% } else { %>
+        <div class="image-grid">
+          <% images.forEach((image) => { %>
+            <figure>
+              <img
+                src="<%= image.imageUrl %>"
+                alt="<%= image.altText || `${vehicle.year} ${vehicle.make} ${vehicle.model}` %>"
+              >
+            </figure>
+          <% }) %>
+        </div>
+      <% } %>
+    </section>
+
+    <section class="vehicle-specifications" aria-labelledby="specifications-heading">
+      <h2 id="specifications-heading">Vehicle Specifications</h2>
+
+      <dl>
+        <div>
+          <dt>Category</dt>
+          <dd><%= vehicle.categoryName %></dd>
+        </div>
+
+        <div>
+          <dt>Year</dt>
+          <dd><%= vehicle.year %></dd>
+        </div>
+
+        <div>
+          <dt>Make</dt>
+          <dd><%= vehicle.make %></dd>
+        </div>
+
+        <div>
+          <dt>Model</dt>
+          <dd><%= vehicle.model %></dd>
+        </div>
+
+        <div>
+          <dt>Mileage</dt>
+          <dd><%= Number(vehicle.mileage).toLocaleString() %> miles</dd>
+        </div>
+
+        <% if (vehicle.color) { %>
+          <div>
+            <dt>Color</dt>
+            <dd><%= vehicle.color %></dd>
+          </div>
+        <% } %>
+
+        <div>
+          <dt>Availability</dt>
+          <dd><%= vehicle.isAvailable ? "Available" : "Sold" %></dd>
+        </div>
+      </dl>
+    </section>
+
+    <% if (vehicle.description) { %>
+      <section class="vehicle-description" aria-labelledby="description-heading">
+        <h2 id="description-heading">Description</h2>
+        <p><%= vehicle.description %></p>
+      </section>
+    <% } %>
+  </article>
+</main>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,70 @@
+<%- include("../partials/header") %>
+
+<main class="inventory-page">
+  <h1><%= title %></h1>
+
+  <section class="category-filter" aria-labelledby="category-heading">
+    <h2 id="category-heading">Browse by Category</h2>
+
+    <nav class="category-links">
+      <a href="/inventory" class="<%= selectedCategoryId === null ? 'active' : '' %>">
+        All Vehicles
+      </a>
+
+      <% categories.forEach((category) => { %>
+        <a
+          href="/inventory/category/<%= category.categoryId %>"
+          class="<%= selectedCategoryId === category.categoryId ? 'active' : '' %>"
+        >
+          <%= category.name %>
+        </a>
+      <% }) %>
+    </nav>
+  </section>
+
+  <section class="vehicle-list" aria-labelledby="vehicle-heading">
+    <h2 id="vehicle-heading">Available Vehicles</h2>
+
+    <% if (vehicles.length === 0) { %>
+      <p>No vehicles are currently available in this category.</p>
+    <% } else { %>
+      <div class="vehicle-grid">
+        <% vehicles.forEach((vehicle) => { %>
+          <article class="vehicle-card">
+            <div class="vehicle-card-content">
+              <h3>
+                <%= vehicle.year %>
+                <%= vehicle.make %>
+                <%= vehicle.model %>
+              </h3>
+
+              <p class="vehicle-category">
+                Category: <%= vehicle.categoryName %>
+              </p>
+
+              <p class="vehicle-price">
+                $<%= Number(vehicle.price).toLocaleString() %>
+              </p>
+
+              <p>
+                Mileage:
+                <%= Number(vehicle.mileage).toLocaleString() %> miles
+              </p>
+
+              <% if (vehicle.color) { %>
+                <p>Color: <%= vehicle.color %></p>
+              <% } %>
+
+              <a class="button"
+                href="/inventory/<%= vehicle.vehicleId %>">
+                View Details
+              </a>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<%- include("../partials/footer") %>

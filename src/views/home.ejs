@@ -1,12 +1,52 @@
 <%- include("partials/header") %>
 
-<main>  
-  <h2><%= title %></h2>
+<main class="home-page">
+  <section class="hero">
+    <h1><%= title %></h1>
 
-  <p>
-    The used car dealership is currently under construction.
-    Please check back soon.
-  </p>
+    <p>
+      Browse our available used vehicles.
+    </p>
+
+    <a class="button" href="/inventory">
+      View Inventory
+    </a>
+  </section>
+
+  <section class="featured-vehicles" aria-labelledby="featured-heading">
+    <h2 id="featured-heading">Featured Vehicles</h2>
+
+    <% if (featuredVehicles.length === 0) { %>
+      <p>No featured vehicles are currently available.</p>
+    <% } else { %>
+      <div class="vehicle-grid">
+        <% featuredVehicles.forEach((vehicle) => { %>
+          <article class="vehicle-card">
+            <h3>
+              <%= vehicle.year %>
+              <%= vehicle.make %>
+              <%= vehicle.model %>
+            </h3>
+
+            <p class="vehicle-price">
+              $<%= Number(vehicle.price).toLocaleString() %>
+            </p>
+
+            <p>
+              <%= Number(vehicle.mileage).toLocaleString() %> miles
+            </p>
+
+            <a
+              class="button"
+              href="/inventory/<%= vehicle.vehicleId %>"
+            >
+              View Details
+            </a>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
 </main>
 
 <%- include("partials/footer") %>
