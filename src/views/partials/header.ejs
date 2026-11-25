@@ -7,8 +7,24 @@
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/inventory.css">
+    <link rel="stylesheet" href="/css/account.css">
   </head>
   <body>
     <header>
       <h1>Used Car Dealership</h1>
+
+      <nav class="site-nav" aria-label="Account navigation">
+        <% if (currentUser) { %>
+          <span>
+            Welcome, <%= currentUser.firstName %>
+          </span>
+
+          <form action="/account/logout" method="POST">
+            <button type="submit">Log Out</button>
+          </form>
+        <% } else { %>
+          <a href="/account/login">Log In</a>
+          <a href="/account/register">Create Account</a>
+        <% } %>
+      </nav>
     </header>
