@@ -6,8 +6,7 @@
     <title><%= title %></title>
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/inventory.css">
-    <link rel="stylesheet" href="/css/account.css">
+    <%- renderStyles() %>
   </head>
   <body>
     <header>
@@ -19,12 +18,33 @@
             Welcome, <%= currentUser.firstName %>
           </span>
 
+          <a href="/account/profile">
+            My Account
+          </a>
+
+          <% if (currentUser.role === "employee" || currentUser.role === "owner") { %>
+            <a href="/dashboard/employee">
+              Employee Dashboard
+            </a>
+          <% } %>
+
+          <% if (currentUser.role === "owner") { %>
+            <a href="/dashboard/owner">
+              Owner Dashboard
+            </a>
+          <% } %>
+
           <form action="/account/logout" method="POST">
             <button type="submit">Log Out</button>
           </form>
         <% } else { %>
-          <a href="/account/login">Log In</a>
-          <a href="/account/register">Create Account</a>
+          <a href="/account/login">
+            Log In
+          </a>
+
+          <a href="/account/register">
+            Create Account
+          </a>
         <% } %>
       </nav>
     </header>

@@ -15,4 +15,11 @@ const homePage = async (req, res, next) => {
   }
 };
 
-export { homePage };
+// Display the account page for logged-in users.
+const accountPage = (req, res) => {
+  res.render("dashboard", {
+    title: "My Account",
+  });
+};
+
+export { homePage, accountPage };

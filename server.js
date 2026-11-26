@@ -42,6 +42,9 @@ if (!process.env.DATABASE_URL) {
 
 const app = express();
 
+// Trust Render's reverse proxy so secure session cookies work in production.
+app.set("trust proxy", 1);
+
 const pgSession = connectPgSimple(session);
 
 /**

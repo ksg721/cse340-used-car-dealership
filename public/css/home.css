@@ -1,0 +1,38 @@
+/* Home page introduction. */
+.hero {
+  margin-bottom: 3rem;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  max-width: 700px;
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero p {
+  max-width: 650px;
+  margin-bottom: 1.5rem;
+  color: #edf3f8;
+  font-size: 1.15rem;
+}
+
+/* Featured vehicle section. */
+.featured-vehicles {
+  margin-bottom: 2.5rem;
+}
+
+.featured-vehicles h2 {
+  margin-bottom: 1rem;
+  color: var(--navy);
+}
+
+@media (max-width: 600px) {
+  .hero {
+    margin-bottom: 2rem;
+  }
+}

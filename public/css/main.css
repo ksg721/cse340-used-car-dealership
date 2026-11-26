@@ -131,9 +131,91 @@ footer p {
   font-weight: 700;
 }
 
+/* Shared buttons and vehicle cards. */
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.1rem;
+  border: 2px solid var(--gold);
+  border-radius: 0.4rem;
+  background: var(--gold);
+  color: #1c1608;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover {
+  border-color: var(--gold-dark);
+  background: var(--gold-dark);
+  color: var(--surface);
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.vehicle-card {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgb(20 43 74 / 16%);
+}
+
+.vehicle-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.vehicle-card h3 {
+  margin: 0 0 0.75rem;
+  color: var(--navy);
+  font-size: 1.35rem;
+}
+
+.vehicle-price {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--gold-dark);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.vehicle-card .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
 @media (max-width: 600px) {
   .site-nav {
     justify-content: flex-start;
     flex-wrap: wrap;
+  }
+
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .vehicle-card,
+  .button {
+    transition: none;
+  }
+
+  .vehicle-card:hover {
+    transform: none;
   }
 }
